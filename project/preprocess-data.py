@@ -77,7 +77,7 @@ for i in range(len(tokenized_tweets)):
 total_data['processed_tweet'] = tokenized_tweets
 print('Execution time: %s seconds' % (time.time() - start_time))
 
-# total_data.to_csv('../dataset_large/processed-tweets-1600000.csv', index=False)
 total_data.to_csv('../dataset_small/processed-tweets.csv', index=False)
+# total_data.to_csv('../dataset_large/processed-tweets-1600000.csv', index=False)
 
 print('Program finished successfully')
