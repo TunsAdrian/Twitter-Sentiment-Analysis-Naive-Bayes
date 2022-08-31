@@ -7,7 +7,10 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import accuracy_score
 import time
 
-total_data = pd.read_csv('../dataset/processed-tweets.csv')
+total_data = pd.read_csv('../dataset_small/processed-tweets.csv')
+# total_data = pd.read_csv('../dataset_large/processed-tweets-1600000.csv')
+
+total_data = total_data.dropna()
 
 start_time = time.time()
 
@@ -18,8 +21,7 @@ X_train, X_test, y_train, y_test = train_test_split(final_vectorized_data, total
 
 model_naive = MultinomialNB().fit(X_train, y_train)
 predicted_naive = model_naive.predict(X_test)
+print('Execution time: %s seconds' % (time.time() - start_time))
 
 score_naive = accuracy_score(y_test, predicted_naive)
 print('Accuracy of Naive-bayes: ', score_naive)
-
-print('Execution time: %s seconds' % (time.time() - start_time))

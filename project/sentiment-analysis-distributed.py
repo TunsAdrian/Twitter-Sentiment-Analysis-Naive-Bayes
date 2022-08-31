@@ -2,14 +2,17 @@ from pyspark.sql import SparkSession
 from pyspark.ml.feature import Tokenizer
 from pyspark.ml.classification import NaiveBayes
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
-from pyspark.ml.feature import CountVectorizer
-from pyspark.ml.feature import IDF
+from pyspark.ml.feature import CountVectorizer, IDF
 from pyspark.ml import Pipeline
 import time
 
 spark = SparkSession.builder.appName('Twitter Sentiment Analysis').master('local[*]').getOrCreate()
 
-df = spark.read.csv('../dataset/processed-tweets.csv', header=True, inferSchema=True)
+df = spark.read.csv('../dataset_small/processed-tweets.csv', header=True, inferSchema=True)
+# df = spark.read.csv('../dataset_large/processed-tweets-1600000.csv', header=True, inferSchema=True)
+# df = spark.read.csv('hdfs:///project/processed-tweets.csv', header=True, inferSchema=True)
+# df = spark.read.csv('hdfs:///project/processed-tweets-1600000.csv', header=True, inferSchema=True)
+
 df = df.na.drop()
 
 start_time = time.time()
@@ -27,10 +30,8 @@ nb = NaiveBayes(modelType='multinomial', labelCol='Sentiment')
 nb_model = nb.fit(train_df)
 
 predictions_df = nb_model.transform(test_df)
-predictions_df.show(5, True)
+print('Execution time: %s seconds' % (time.time() - start_time))
 
 evaluator = MulticlassClassificationEvaluator(labelCol='Sentiment', metricName='accuracy')
 nb_accuracy = evaluator.evaluate(predictions_df)
 print('Accuracy of Naive Bayes: ' + str(nb_accuracy))
-
-print('Execution time: %s seconds' % (time.time() - start_time))
