@@ -1,4 +1,4 @@
-# Big Data Project: Sentiment Analysis
+# Twitter Sentiment Analysis using Naïve Bayes
 
 This is a project made for "Big Data Applications" subject, Master's degree. In the application, a comparison of Naïve Bayes classifier was made between a sequential algorithm
 implementation and a distributed algorithm implementation, with the purpose of performing
