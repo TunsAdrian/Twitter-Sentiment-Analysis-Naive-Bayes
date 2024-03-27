@@ -11,5 +11,3 @@ Links for the used datasets:
 - https://www.kaggle.com/competitions/twitter-sentiment-analysis2
 
 - https://www.kaggle.com/datasets/kazanova/sentiment140?datasetId=2477
-
-The project was inspired by [this](https://github.com/gunjannandy/twitter-sentiment-analysis) repository.
